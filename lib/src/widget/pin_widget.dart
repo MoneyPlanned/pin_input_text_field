@@ -301,6 +301,8 @@ class _PinInputTextFieldState extends State<PinInputTextField>
 
         /// Clear default text decoration.
         decoration: InputDecoration(
+          filled: true,
+          fillColor: Colors.transparent,
           /// Hide the counterText
           counterText: '',
 
