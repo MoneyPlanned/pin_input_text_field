@@ -554,12 +554,12 @@ class _PinPaint extends CustomPainter {
     this.cursor,
     this.textDirection = TextDirection.ltr,
   }) : decoration = decoration.copyWith(
-          textStyle: decoration.textStyle ?? themeData.textTheme.headline5,
+          textStyle: decoration.textStyle ?? themeData.textTheme.displayMedium,
           errorTextStyle: decoration.errorTextStyle ??
-              themeData.textTheme.caption
-                  ?.copyWith(color: themeData.errorColor),
+              themeData.textTheme.labelMedium
+                  ?.copyWith(color: themeData.indicatorColor),
           hintTextStyle: decoration.hintTextStyle ??
-              themeData.textTheme.headline5
+              themeData.textTheme.displayMedium
                   ?.copyWith(color: themeData.hintColor),
         );
 

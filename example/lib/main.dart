@@ -53,7 +53,7 @@ class ListPage extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage(this.textFieldType, {Key key}) : super(key: key);
+  MyHomePage(this.textFieldType, {Key? key}) : super(key: key);
 
   final TextFieldType textFieldType;
 
@@ -77,14 +77,14 @@ class _MyHomePageState extends State<MyHomePage> {
       GlobalKey<ScaffoldState>(debugLabel: 'home page global key');
 
   /// Decorate the outside of the Pin.
-  PinDecoration _pinDecoration;
+  PinDecoration? _pinDecoration;
 
   /// Control whether show the obscureCode.
   bool _obscureEnable = false;
 
   PinEntryType _pinEntryType = PinEntryType.underline;
   ColorBuilder _solidColor =
-      PinListenColorBuilder(Colors.grey, Colors.grey[400]);
+      PinListenColorBuilder(Colors.grey, Colors.grey[400]!);
   bool _solidEnable = false;
 
   /// Control whether textField is enable.
@@ -209,7 +209,7 @@ class _MyHomePageState extends State<MyHomePage> {
               value: _obscureEnable,
               onChanged: (enable) {
                 setState(() {
-                  _obscureEnable = enable;
+                  _obscureEnable = enable ?? false;
                   _selectedMenu(_pinEntryType);
                 });
               }),
@@ -231,7 +231,7 @@ class _MyHomePageState extends State<MyHomePage> {
               value: _solidEnable,
               onChanged: (enable) {
                 setState(() {
-                  _solidEnable = enable;
+                  _solidEnable = enable ?? false;
                   _selectedMenu(_pinEntryType);
                 });
               }),
@@ -249,7 +249,7 @@ class _MyHomePageState extends State<MyHomePage> {
             value: _enable,
             onChanged: (enable) {
               setState(() {
-                _enable = enable;
+                _enable = enable ?? false;
               });
             },
           )
@@ -267,7 +267,7 @@ class _MyHomePageState extends State<MyHomePage> {
             value: _cursorEnable,
             onChanged: (enable) {
               setState(() {
-                _cursorEnable = enable;
+                _cursorEnable = enable ?? false;
               });
             },
           )
@@ -287,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
             height: _kInputHeight,
             child: PinInputTextField(
               pinLength: _pinLength,
-              decoration: _pinDecoration,
+              decoration: _pinDecoration!,
               controller: _pinEditingController,
               textInputAction: TextInputAction.go,
               enabled: _enable,
@@ -325,15 +325,15 @@ class _MyHomePageState extends State<MyHomePage> {
             child: PinInputTextFormField(
               key: _formKey,
               pinLength: _pinLength,
-              decoration: _pinDecoration,
+              decoration: _pinDecoration!,
               controller: _pinEditingController,
               textInputAction: TextInputAction.go,
               enabled: _enable,
               keyboardType: TextInputType.text,
               textCapitalization: TextCapitalization.characters,
               onSubmit: (pin) {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
                 }
               },
               onChanged: (pin) {
@@ -343,7 +343,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 debugPrint('onSaved pin:$pin');
               },
               validator: (pin) {
-                if (pin.isEmpty) {
+                if (pin!.isEmpty) {
                   setState(() {
                     _hasError = true;
                   });
@@ -376,8 +376,8 @@ class _MyHomePageState extends State<MyHomePage> {
             children: <Widget>[
               ElevatedButton(
                 onPressed: () {
-                  if (_formKey.currentState.validate()) {
-                    _formKey.currentState.save();
+                  if (_formKey.currentState!.validate()) {
+                    _formKey.currentState!.save();
                   }
                 },
                 child: Text(
@@ -452,13 +452,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
 class ExampleDecoration extends PinDecoration {
   ExampleDecoration({
-    TextStyle textStyle,
-    ObscureStyle obscureStyle,
-    String errorText,
-    TextStyle errorTextStyle,
-    String hintText,
-    TextStyle hintTextStyle,
-    ColorBuilder bgColorBuilder,
+    TextStyle? textStyle,
+    ObscureStyle? obscureStyle,
+    String? errorText,
+    TextStyle? errorTextStyle,
+    String? hintText,
+    TextStyle? hintTextStyle,
+    ColorBuilder? bgColorBuilder,
   }) : super(
           textStyle: textStyle,
           obscureStyle: obscureStyle,
@@ -470,13 +470,13 @@ class ExampleDecoration extends PinDecoration {
 
   @override
   PinDecoration copyWith({
-    TextStyle textStyle,
-    ObscureStyle obscureStyle,
-    String errorText,
-    TextStyle errorTextStyle,
-    String hintText,
-    TextStyle hintTextStyle,
-    ColorBuilder bgColorBuilder,
+    TextStyle? textStyle,
+    ObscureStyle? obscureStyle,
+    String? errorText,
+    TextStyle? errorTextStyle,
+    String? hintText,
+    TextStyle? hintTextStyle,
+    ColorBuilder? bgColorBuilder,
   }) {
     return ExampleDecoration(
         textStyle: textStyle ?? this.textStyle,
@@ -493,17 +493,17 @@ class ExampleDecoration extends PinDecoration {
 
   @override
   void drawPin(
-    Canvas canvas,
-    Size size,
-    String text,
-    int pinLength,
-    Cursor cursor,
-    TextDirection textDirection,
+    Canvas? canvas,
+    Size? size,
+    String? text,
+    int? pinLength,
+    Cursor? cursor,
+    TextDirection? textDirection,
   ) {
     /// You can draw anything you want here.
-    canvas.drawLine(
+    canvas!.drawLine(
       Offset.zero,
-      Offset(size.width, size.height),
+      Offset(size!.width, size.height),
       Paint()
         ..color = Colors.red
         ..strokeWidth = 10
